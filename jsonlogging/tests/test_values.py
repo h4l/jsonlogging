@@ -200,7 +200,7 @@ class TestOrderedObjectValue(unittest.TestCase):
         self.assertEqual(
             # Note missing test_lineno as it's None
             ["test_msg", "test_path", "test_args", "test_formatted_msg"],
-            json.keys()
+            list(json.keys())
         )
 
     def test_oovs_can_nest(self):
@@ -223,8 +223,8 @@ class TestOrderedObjectValue(unittest.TestCase):
         json = oov.render(record)
 
         self.assertEqual(2, len(json))
-        self.assertEqual(["test_msg", "nested"], json.keys())
+        self.assertEqual(["test_msg", "nested"], list(json.keys()))
 
         nested = json["nested"]
         self.assertEqual(1, len(nested))
-        self.assertEqual(["nested_path"], nested.keys())
+        self.assertEqual(["nested_path"], list(nested.keys()))
