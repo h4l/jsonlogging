@@ -116,7 +116,7 @@ class TestExceptionRelatedRecordValue(unittest.TestCase):
 
     def test_exception_type(self):
         self.assertEqual(
-            "exceptions.ZeroDivisionError",
+            "{0}.ZeroDivisionError".format(ZeroDivisionError.__module__),
             values.ExceptionTypeRecordValue().render(self.record)
         )
 
