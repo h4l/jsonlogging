@@ -38,6 +38,7 @@ setup(
         "Topic :: System :: Logging"
     ],
     long_description=open("README.md").read(),
+    install_requires="six >= 1.0.0, < 2.0.0",
     test_suite="jsonlogging.tests.test_all",
     tests_require=["mock >= 1.0.0, < 2.0.0", "pytz"]
 )
