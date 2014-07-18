@@ -8,6 +8,8 @@ import datetime
 import traceback
 from collections import OrderedDict
 
+import six
+
 
 class OrderedObjectValue(object):
     """
@@ -120,7 +122,7 @@ class FormattedMessageRecordValue(object):
     LogRecord's formatted message.
     """
     def render(self, record):
-        if isinstance(record.msg, basestring):
+        if isinstance(record.msg, six.string_types):
             return record.getMessage()
         return None
 
