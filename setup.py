@@ -39,5 +39,5 @@ setup(
     ],
     long_description=open("README.md").read(),
     test_suite="jsonlogging.tests.test_all",
-    tests_require="mock >= 1.0.0, < 2.0.0"
+    tests_require=["mock >= 1.0.0, < 2.0.0", "pytz"]
 )

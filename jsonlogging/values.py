@@ -54,6 +54,23 @@ class RecordValue(object):
         return getattr(record, self._attr)
 
 
+# Define a UTC tzinfo class to use when creating datetimes from timestamps
+_ZERO = datetime.timedelta(0)
+
+
+class _UTC(datetime.tzinfo):
+    """A UTC tzinfo class."""
+
+    def utcoffset(self, dt):
+        return _ZERO
+
+    def tzname(self, dt):
+        return "UTC"
+
+    def dst(self, dt):
+        return _ZERO
+
+
 class DateRecordValue(object):
     """
     A Value implementation which renders to a string representation of the
@@ -65,12 +82,20 @@ class DateRecordValue(object):
 
     timestamp_attribute = "created"
 
+    def __init__(self, timezone=_UTC()):
+        """
+        Create a DateRecordValue. The timezone of the produced timestamps
+        can be controlled by passing a tzinfo instance with the timezone
+        parameter. The default timezone is UTC.
+        """
+        self.timezone = timezone
+
     def get_datetime(self, record):
         """
         Create a datetime instance from the LogRecord.
         """
         value = RecordValue(self.timestamp_attribute).render(record)
-        return datetime.datetime.fromtimestamp(value)
+        return datetime.datetime.fromtimestamp(value, self.timezone)
 
     def render(self, record):
         return self.format_datetime(self.get_datetime(record))

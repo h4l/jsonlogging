@@ -5,6 +5,8 @@ import time
 import traceback
 import unittest
 
+import pytz
+
 from jsonlogging import values
 
 
@@ -37,7 +39,18 @@ class TestDateRecordValue(unittest.TestCase):
         record = logging.makeLogRecord({"created": now})
 
         actual = values.DateRecordValue().render(record)
-        expected = datetime.datetime.fromtimestamp(now).isoformat()
+        expected = datetime.datetime.fromtimestamp(now, pytz.utc).isoformat()
+
+        self.assertEqual(expected, actual)
+
+    def test_render_alternate_timezone(self):
+        now = 1413846479.698864  # example return val of time.time()
+        record = logging.makeLogRecord({"created": now})
+
+        timezone = pytz.timezone("Antarctica/South_Pole")
+
+        actual = values.DateRecordValue(timezone=timezone).render(record)
+        expected = datetime.datetime.fromtimestamp(now, timezone).isoformat()
 
         self.assertEqual(expected, actual)
 
