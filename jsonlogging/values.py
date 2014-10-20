@@ -80,21 +80,26 @@ class DateRecordValue(object):
     by datetime.datetime.isoformat().
     """
 
-    timestamp_attribute = "created"
+    timestamp_value = RecordValue("created")
 
-    def __init__(self, timezone=_UTC()):
+    def __init__(self, timezone=_UTC(), timestamp_value=timestamp_value):
         """
         Create a DateRecordValue. The timezone of the produced timestamps
         can be controlled by passing a tzinfo instance with the timezone
         parameter. The default timezone is UTC.
+
+        By default the 'created' attribute of the log record is used as the
+        timestamp value. This can be changed by providing a Value instance
+        with the timestamp_value option.
         """
         self.timezone = timezone
+        self.timestamp_value = timestamp_value
 
     def get_datetime(self, record):
         """
         Create a datetime instance from the LogRecord.
         """
-        value = RecordValue(self.timestamp_attribute).render(record)
+        value = self.timestamp_value.render(record)
         return datetime.datetime.fromtimestamp(value, self.timezone)
 
     def render(self, record):
