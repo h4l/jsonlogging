@@ -1,3 +1,6 @@
+# Basic dependencies
+six
+
 # The following packages are required to run the tests:
 mock
 pytz
