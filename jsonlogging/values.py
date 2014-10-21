@@ -66,9 +66,6 @@ class _UTC(datetime.tzinfo):
     def utcoffset(self, dt):
         return _ZERO
 
-    def tzname(self, dt):
-        return "UTC"
-
     def dst(self, dt):
         return _ZERO
 
