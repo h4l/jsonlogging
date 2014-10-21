@@ -1,7 +1,7 @@
-import unittest
 import logging
 
 from jsonlogging import values, recordadapter
+from jsonlogging.tests import unittest
 
 
 class TestValueRecordAdapter(unittest.TestCase):

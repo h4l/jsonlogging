@@ -1,11 +1,23 @@
-import unittest
 import logging
 import logging.config
-
+import sys
 
 from jsonlogging.formatters import JsonFormatter
+from jsonlogging.tests import unittest
+
 
 class TestJsonFormatterDictconfigFactory(unittest.TestCase):
+
+    def get_dictconfig(self):
+        """
+        Get a dictConfig implementation. On Python 2.6 we use the
+        implementation from the logutils library.
+        """
+        if not hasattr(logging.config, "dictConfig"):
+            from logutils.dictconfig import dictConfig
+            return dictConfig
+        return logging.config.dictConfig
+
     def test_dictconfig_factory(self):
 
         conf = {
@@ -33,7 +45,8 @@ class TestJsonFormatterDictconfigFactory(unittest.TestCase):
             }
         }
 
-        logging.config.dictConfig(conf)
+        dictConfig = self.get_dictconfig()
+        dictConfig(conf)
 
         logger = logging.getLogger(__name__)
         handler = logger.handlers[0]

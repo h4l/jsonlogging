@@ -15,6 +15,34 @@ def get_version(filename):
 
     return match.group(1)
 
+def install_requires():
+    deps = ["six >= 1.0.0, < 2.0.0"]
+
+    # Install ordereddict if an implementation is not in collections
+    # (Py <= 2.6).
+    try:
+        from collections import OrderedDict
+    except ImportError:
+        deps.append("ordereddict")
+
+    return deps
+
+
+def tests_require():
+    deps = ["mock >= 1.0.0, < 2.0.0", "pytz"]
+
+    # Add unittest2 to tests_require if needed
+    import unittest
+    if not hasattr(unittest.TestCase, "assertIsNone"):
+        deps.append("unittest2")
+
+    import logging.config
+    if not hasattr(logging.config, "dictConfig"):
+        deps.append("logutils")
+
+    return deps
+
+
 setup(
     name="jsonlogging",
     description="jsonlogging provides structured log output from the "
@@ -39,7 +67,7 @@ setup(
         "Topic :: System :: Logging"
     ],
     long_description=open("README.md").read(),
-    install_requires="six >= 1.0.0, < 2.0.0",
+    install_requires=install_requires(),
     test_suite="jsonlogging.tests.test_all",
-    tests_require=["mock >= 1.0.0, < 2.0.0", "pytz"]
+    tests_require=tests_require()
 )

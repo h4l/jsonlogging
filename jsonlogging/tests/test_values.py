@@ -3,11 +3,11 @@ import logging
 import sys
 import time
 import traceback
-import unittest
 
 import pytz
 
 from jsonlogging import values
+from jsonlogging.tests import unittest
 
 
 class TestRecordValue(unittest.TestCase):

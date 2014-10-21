@@ -6,7 +6,10 @@ from a logging.LogRecord instance.
 
 import datetime
 import traceback
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 import six
 
@@ -144,7 +147,7 @@ class ExceptionTypeRecordValue(BaseExcInfoRecordValue):
     def exc_info_value(self, exc_info):
         exception_type, _, _ = exc_info
 
-        return "{}.{}".format(
+        return "{0}.{1}".format(
             exception_type.__module__, exception_type.__name__)
 
 
@@ -156,7 +159,7 @@ class ExceptionMessageRecordValue(BaseExcInfoRecordValue):
     def exc_info_value(self, exc_info):
         _, exception, _ = exc_info
 
-        return "{}".format(exception)
+        return "{0}".format(exception)
 
 
 class ExceptionTracebackRecordValue(BaseExcInfoRecordValue):

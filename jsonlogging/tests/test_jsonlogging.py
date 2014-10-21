@@ -3,12 +3,12 @@ Integration tests for the jsonlogging package.
 """
 import json
 import logging
-import unittest
 
 from mock import MagicMock
 import six
 
 import jsonlogging
+from jsonlogging.tests import unittest
 
 
 class TestJsonLogging(unittest.TestCase):
@@ -23,7 +23,7 @@ class TestJsonLogging(unittest.TestCase):
 
         # Configure logging
         stream = six.StringIO()
-        log_handler = logging.StreamHandler(stream=stream)
+        log_handler = logging.StreamHandler(stream)
         log_handler.setFormatter(json_formatter)  # Use our JSON formatter
         log_handler.setLevel(logging.DEBUG)
         logger = logging.getLogger("test_jsonlogging")

@@ -1,13 +1,17 @@
-from collections import OrderedDict
 import json
 import logging
-import unittest
 
 from mock import MagicMock, sentinel
 
 from jsonlogging import values
 from jsonlogging import recordadapter
 from jsonlogging import formatters
+from jsonlogging.tests import unittest
+
+try:
+    from collections import OrderedDict
+except ImportError:
+    from ordereddict import OrderedDict
 
 
 class TestJsonFormatter(unittest.TestCase):
