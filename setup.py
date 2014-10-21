@@ -21,7 +21,7 @@ setup(
                 "logging module in JSON format",
     author="Hal Blackburn",
     author_email="hwtb2@cam.ac.uk",
-    url="https://github.com/ucamhal/ravenpy",
+    url="https://github.com/h4l/jsonlogging",
     version=get_version("jsonlogging/__init__.py"),
     packages=["jsonlogging"],
     license="BSD",
@@ -33,6 +33,7 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3",
         "Programming Language :: Python",
         "Topic :: Software Development",
         "Topic :: System :: Logging"

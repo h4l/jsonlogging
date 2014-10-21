@@ -1,4 +1,4 @@
-Copyright (c) 2013-2014 Hal Blackburn <hwtb2@caret.cam.ac.uk>
+Copyright (c) 2013-2014 Hal Blackburn <hwtb2@cam.ac.uk>
                         & Digital Services, Cambridge University Library
 All rights reserved.
 
